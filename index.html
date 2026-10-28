@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfólio de Ana Laura Morais</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a working ledger. Narrow reading column, each project = a sheet with Antes/Depois tabs and a live demo. */
+:root {
+  --paper: #f5f7f6;
+  --sheet: #ffffff;
+  --ink: #15211f;
+  --ink-2: #4a5a57;
+  --rule: #d9e1df;
+  --grid: #edf1f0;
+  --accent: #0b6e5a;
+  --accent-soft: #e2f1ed;
+  --warn: #9a6400;
+  --warn-soft: #fbf0d6;
+  --bad: #b23a5c;
+  --bad-soft: #f9e3ea;
+  --good: #1f7a3f;
+  --good-soft: #e1f3e6;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1615; --sheet: #162120; --ink: #e6efed; --ink-2: #a3b4b0;
+    --rule: #2a3a37; --grid: #1c2928; --accent: #4cc3a6; --accent-soft: #173a33;
+    --warn: #e5b04a; --warn-soft: #3a2f16; --bad: #ef7f9c; --bad-soft: #3d1f29;
+    --good: #6ad08d; --good-soft: #183626; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1615; --sheet: #162120; --ink: #e6efed; --ink-2: #a3b4b0;
+  --rule: #2a3a37; --grid: #1c2928; --accent: #4cc3a6; --accent-soft: #173a33;
+  --warn: #e5b04a; --warn-soft: #3a2f16; --bad: #ef7f9c; --bad-soft: #3d1f29;
+  --good: #6ad08d; --good-soft: #183626; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.col { display: grid; gap: 10px; align-content: start; min-width: 0; }
+body { margin: 0;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: 17px; line-height: 1.55;
+}
+.wrap {
+  max-width: 1040px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 56px;
+  display: grid; gap: 40px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+p { margin: 0; max-width: 66ch; }
+.mono { font-family: var(--f-mono); font-size: 0.82em; }
+.label { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+header { display: grid; gap: 14px; }
+header .lead { font-size: 1.15rem; color: var(--ink-2); }
+.contact { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.95rem; color: var(--ink-2); }
+.notice { display: inline-flex; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--ink-2); border-left: 3px solid var(--warn); padding: 4px 0 4px 10px; }
+
+/* results strip */
+.results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--rule); background: var(--sheet); border-radius: 6px; }
+.results a { text-decoration: none; color: inherit; padding: 18px 20px; display: grid; gap: 4px; }
+.results a + a { border-left: 1px solid var(--rule); }
+.results a:hover { background: var(--grid); }
+.big { font-family: var(--f-display); font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.results span:last-child { font-size: 0.95rem; color: var(--ink-2); }
+@media (max-width: 720px) {
+  .results { grid-template-columns: 1fr; }
+  .results a + a { border-left: 0; border-top: 1px solid var(--rule); }
+}
+
+/* project */
+.project { display: grid; gap: 18px; scroll-margin-top: 20px; }
+.project-head { display: grid; gap: 8px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.facts > div { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.facts p { font-size: 0.98rem; }
+@media (max-width: 760px) { .facts { grid-template-columns: 1fr; } }
+
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.sheet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--rule); background: var(--grid); }
+.tabs { display: inline-flex; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.tabs button { font: 600 0.88rem var(--f-body); padding: 6px 14px; border: 0; background: var(--sheet); color: var(--ink-2); cursor: pointer; }
+.tabs button + button { border-left: 1px solid var(--rule); }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--sheet); }
+.sheet-body { padding: 16px; display: grid; gap: 16px; }
+.caption { font-size: 0.9rem; color: var(--ink-2); }
+
+/* tables */
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { font-family: var(--f-mono); font-weight: 500; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-2); border-bottom: 1px solid var(--rule); white-space: nowrap; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.old td { font-family: var(--f-mono); font-size: 0.8rem; border: 1px solid var(--grid); }
+.old th { border: 1px solid var(--grid); }
+.flag { background: var(--bad-soft); }
+.flag-w { background: var(--warn-soft); }
+.tag { display: inline-block; font: 500 0.72rem var(--f-mono); padding: 1px 7px; border-radius: 3px; white-space: nowrap; }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+.tag.warn { background: var(--warn-soft); color: var(--warn); }
+.tag.good { background: var(--good-soft); color: var(--good); }
+.tag.neutral { background: var(--grid); color: var(--ink-2); }
+.tag.accent { background: var(--accent-soft); color: var(--accent); }
+
+/* caixa demo */
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+select, input[type="number"] { font: 600 0.9rem var(--f-body); color: var(--ink); background: var(--sheet); border: 1px solid var(--rule); border-radius: 4px; padding: 5px 8px; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.kpi { border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
+.kpi b { font-family: var(--f-display); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.kpi.alert { border-color: var(--warn); background: var(--warn-soft); }
+@media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.bars { display: grid; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: 9.5em minmax(0, 1fr) 6.5em; gap: 10px; align-items: center; font-size: 0.88rem; }
+.bar-track { height: 12px; background: var(--grid); border-radius: 2px; position: relative; }
+.bar-fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 2px; }
+.bar-fill.over { background: var(--warn); }
+.bar-goal { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+.bar-row .num { text-align: right; font-variant-numeric: tabular-nums; }
+.checks { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.checks li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; font-size: 0.9rem; padding: 6px 8px; border-radius: 4px; }
+.checks li.done { opacity: 0.55; }
+.checks li.done span { text-decoration: line-through; }
+.checks input { margin-top: 4px; accent-color: var(--accent); }
+
+/* pulse */
+.counters { display: flex; flex-wrap: wrap; gap: 10px; }
+.counter { border: 1px solid var(--rule); border-radius: 4px; padding: 6px 12px; display: grid; min-width: 7.5em; }
+.counter b { font-family: var(--f-display); font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+.counter.late { border-color: var(--bad); }
+.counter.late b { color: var(--bad); }
+.hot { color: var(--accent); font-size: 0.85rem; }
+tr.is-hot td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+
+/* how */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.steps li { padding: 14px 16px 0 0; display: grid; gap: 6px; align-content: start; counter-increment: s; }
+.steps li::before { content: counter(s); font-family: var(--f-mono); font-size: 0.8rem; color: var(--accent); }
+.steps p { font-size: 0.95rem; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .steps { grid-template-columns: 1fr; } }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+footer { font-size: 0.9rem; color: var(--ink-2); display: grid; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { .bar-fill { transition: width .35s ease; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <span class="label">Portfólio · trilha AI Builder</span>
+  <h1>Ana Laura Morais</h1>
+  <p class="lead">Uso IA para transformar processos manuais em ferramentas que as pessoas adotam. Estes são três projetos que construí com Claude e Excel e que estão em uso hoje: no negócio da minha família e na minha área na Siemens.</p>
+  <div class="contact">
+    <span>Administração · UNICAMP (dez/2026)</span>
+    <span>Limeira, SP</span>
+    <span>analauramorais000@gmail.com</span>
+    <a href="https://www.linkedin.com/in/ana-laura-morais-281917204/">LinkedIn</a>
+  </div>
+  <p class="notice"><span class="label" style="color:var(--warn)">Dados</span> Todos os números, nomes e itens desta página são fictícios. As ferramentas reais têm dados financeiros da família e informações internas da empresa, por isso não estão publicadas.</p>
+</header>
+
+<nav class="results" aria-label="Resultados">
+  <a href="#caixa"><span class="label">Controle financeiro</span><span class="big">3 h → 30 min</span><span>na rotina do caixa da pizzaria</span></a>
+  <a href="#pulse"><span class="label">Pulse Check</span><span class="big">~10 pessoas</span><span>com a reunião semanal guiada por destaques</span></a>
+  <a href="#cardapio"><span class="label">Cardápio</span><span class="big">132 itens</span><span>reajustados por regra, sem editar à mão</span></a>
+</nav>
+
+<!-- PROJETO 1 -->
+<section class="project" id="caixa">
+  <div class="project-head">
+    <span class="label">Projeto 1 · Negócio familiar · 2026</span>
+    <h2>Sistema de controle financeiro da pizzaria</h2>
+  </div>
+  <div class="facts">
+    <div><span class="label">Antes</span><p>Uma aba única de movimento diário, com cerca de 1.000 linhas por ano. Categorias digitadas à mão, saldo corrido célula a célula e o faturamento do mês inteiro numa linha só.</p></div>
+    <div><span class="label">O que construí</span><p>Lançamentos com categorias em lista, saldo automático, resumo do ano, gasto por fornecedor e um painel mensal com faturamento por canal, CMV, margem e alertas de meta.</p></div>
+    <div><span class="label">Resultado</span><p>A rotina do caixa caiu de cerca de 3 h para 30 min. Na migração, a conferência encontrou 15 inconsistências que a planilha antiga escondia.</p></div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet-bar">
+      <span class="label">Demonstração</span>
+      <div class="tabs" role="tablist" data-group="caixa">
+        <button role="tab" aria-selected="false" data-view="antes">Antes</button>
+        <button role="tab" aria-selected="true" data-view="depois">Depois</button>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="caixa-antes" hidden>
+      <p class="caption">Como era a planilha: tudo numa coluna de lançamentos, sem padrão. Em destaque, o tipo de problema que o novo sistema passou a apontar.</p>
+      <div class="scroll">
+        <table class="old">
+          <thead><tr><th>Dia</th><th>Lançamento</th><th class="num">Entrada</th><th class="num">Saída</th><th class="num">Saldo</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>01/ago</td><td>GÁS</td><td></td><td class="num">420,00</td><td class="num">-420,00</td><td></td></tr>
+            <tr><td>01/ago</td><td>CUSTO COM MATERIA PRIMA</td><td></td><td class="num">2.761,93</td><td class="num">-3.181,93</td><td></td></tr>
+            <tr class="flag-w"><td>2/8/2026/ pix fornec.</td><td>CUSTO COM MATERIA PRIMA</td><td></td><td class="num">6.300,00</td><td class="num">-9.481,93</td><td><span class="tag warn">data misturada com texto</span></td></tr>
+            <tr class="flag-w"><td></td><td>CUSTO COM MATERIA PRIMA</td><td></td><td class="num">1.169,19</td><td class="num">-10.651,12</td><td><span class="tag warn">sem data</span></td></tr>
+            <tr class="flag"><td>11/ago</td><td>CUSTO COM MATERIA PRIMA</td><td></td><td class="num">1.240,00</td><td class="num">-11.891,12</td><td><span class="tag bad">duplicado?</span></td></tr>
+            <tr class="flag"><td>11/ago</td><td>CUSTO COM MATERIA PRIMA</td><td></td><td class="num">1.240,00</td><td class="num"></td><td><span class="tag bad">saldo sem fórmula</span></td></tr>
+            <tr><td>rosana mês</td><td>MATERIAL DE LIMPEZA</td><td></td><td class="num">840,00</td><td class="num">-13.971,12</td><td></td></tr>
+            <tr class="flag-w"><td>31/ago</td><td>VENDAS</td><td class="num">186.500,00</td><td></td><td class="num">172.528,88</td><td><span class="tag warn">mês inteiro numa linha</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="caixa-depois">
+      <div class="controls">
+        <label class="label" for="mes">Mês</label>
+        <select id="mes"><option value="ago">Agosto</option><option value="set">Setembro</option><option value="out" selected>Outubro</option></select>
+        <span class="caption">Escolha o mês: o painel inteiro se atualiza.</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><span class="label">Faturamento</span><b id="k-fat"></b></div>
+        <div class="kpi"><span class="label">Saídas</span><b id="k-sai"></b></div>
+        <div class="kpi"><span class="label">Resultado</span><b id="k-res"></b></div>
+        <div class="kpi" id="k-cmv-box"><span class="label">CMV / faturamento</span><b id="k-cmv"></b></div>
+      </div>
+      <div class="two">
+        <div class="col" aria-label="Faturamento por canal">
+          <h3>Faturamento por canal</h3>
+          <div id="canais" class="bars"></div>
+        </div>
+        <div class="col" aria-label="Saídas por grupo">
+          <h3>Saídas por grupo <span class="caption" style="font-weight:400">· traço = meta</span></h3>
+          <div id="grupos" class="bars"></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:8px">Pontos a conferir <span class="caption" style="font-weight:400">· encontrados na migração; marque o que foi resolvido</span></h3>
+        <ul class="checks" id="checks"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PROJETO 2 -->
+<section class="project" id="pulse">
+  <div class="project-head">
+    <span class="label">Projeto 2 · Inteligência de Mercado, Siemens · 2026</span>
+    <h2>Pulse Check: ata e status semanal da área</h2>
+  </div>
+  <div class="facts">
+    <div><span class="label">Antes</span><p>Um PowerPoint de 11 slides com tabelas de 9 colunas. A coluna de status ficava vazia, não havia histórico por reunião e a ata não guiava a conversa: não dava para passar por todos os pontos nem pelos principais.</p></div>
+    <div><span class="label">O que construí</span><p>Um modelo em Excel com uma aba por reunião. Cada pessoa atualiza as próprias atividades e marca o que é destaque da semana. Um painel conta o que está em aberto, vencido ou concluído.</p></div>
+    <div><span class="label">Resultado</span><p>A reunião da equipe, com cerca de 10 pessoas, passou a ter roteiro: dá para cobrir todos os pontos ou só os destaques. Em uso desde outubro de 2026.</p></div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet-bar">
+      <span class="label">Demonstração</span>
+      <div class="tabs" role="tablist" data-group="pulse">
+        <button role="tab" aria-selected="false" data-view="antes">Antes</button>
+        <button role="tab" aria-selected="true" data-view="depois">Depois</button>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="pulse-antes" hidden>
+      <p class="caption">Como era: um slide por tema, com texto longo em cada célula e a coluna de status em branco.</p>
+      <div class="scroll">
+        <table class="old">
+          <thead><tr><th>Iniciativa</th><th>What?</th><th>Why?</th><th>Where?</th><th>How?</th><th>Who?</th><th>When?</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Eventos</td><td>Contrato do evento do setor concluído. Negociar estande para o próximo ano. Ver orçamento com marketing.</td><td>Dar visibilidade aos trabalhos e gerar oportunidades</td><td>Presencial</td><td>Novos eventos para participação. Alinhar com a área.</td><td>Bruno</td><td>Finalizado / 22/05 / 18/05</td><td class="flag-w"></td></tr>
+            <tr><td>Mapeamento de mercado</td><td>Painel de projetos do segmento</td><td>Garantir visibilidade contínua e centralizada</td><td>Painel</td><td>Manter o pipeline atualizado a cada 15 dias</td><td>Bruno / Carla</td><td>Recorrente</td><td class="flag-w"></td></tr>
+            <tr><td>Apresentações</td><td>Quarterly: preparação / revisão / kick-off</td><td></td><td></td><td>Aguardando o próximo evento</td><td>Carla</td><td>2º semestre</td><td class="flag-w"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="pulse-depois">
+      <div class="controls">
+        <span class="label">Reunião de 26/10</span>
+        <div class="tabs" role="tablist" data-group="filtro">
+          <button role="tab" aria-selected="true" data-view="destaques">Só destaques</button>
+          <button role="tab" aria-selected="false" data-view="todos">Todos os pontos</button>
+        </div>
+      </div>
+      <div class="counters">
+        <div class="counter"><span class="label">Destaques</span><b id="c-hot"></b></div>
+        <div class="counter"><span class="label">Em aberto</span><b id="c-open"></b></div>
+        <div class="counter late"><span class="label">Prazo vencido</span><b id="c-late"></b></div>
+        <div class="counter"><span class="label">Concluídos</span><b id="c-done"></b></div>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Tema</th><th>Iniciativa</th><th>Atualização da semana</th><th>Próximo passo</th><th>Resp.</th><th>Prazo</th><th>Status</th></tr></thead>
+          <tbody id="pulse-rows"></tbody>
+        </table>
+      </div>
+      <p class="caption"><span class="hot">●</span> = destaque marcado por quem é responsável. Prazo vencido = data anterior à reunião e item ainda não concluído.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PROJETO 3 -->
+<section class="project" id="cardapio">
+  <div class="project-head">
+    <span class="label">Projeto 3 · Negócio familiar · 2026</span>
+    <h2>Cardápio digital estruturado</h2>
+  </div>
+  <div class="facts">
+    <div><span class="label">Antes</span><p>O cardápio era um arquivo de Word. A cada reajuste, alguém mudava preço por preço, em três tamanhos de pizza, sem saber se algum item tinha ficado para trás.</p></div>
+    <div><span class="label">O que construí</span><p>Uma base com 132 itens em 20 categorias, com regras de reajuste por categoria e uma conferência que compara a base nova com a original.</p></div>
+    <div><span class="label">Resultado</span><p>O reajuste virou uma regra aplicada de uma vez, com o registro do que mudou e a garantia de que nenhum item se perdeu.</p></div>
+  </div>
+
+  <div class="sheet">
+    <div class="sheet-bar">
+      <span class="label">Demonstração</span>
+      <div class="tabs" role="tablist" data-group="cardapio">
+        <button role="tab" aria-selected="false" data-view="antes">Antes</button>
+        <button role="tab" aria-selected="true" data-view="depois">Depois</button>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="cardapio-antes" hidden>
+      <p class="caption">Como era: texto corrido no Word, com preços digitados um a um.</p>
+      <div style="font-family:Georgia,serif;font-size:0.95rem;border:1px solid var(--rule);padding:14px 16px;border-radius:4px;max-width:60ch">
+        <p><b>PIZZAS SALGADAS</b></p>
+        <p><b>Calabresa</b> – molho de tomate, mussarela, calabresa, cebola e orégano ...... P 64,90 / M 69,90 / G 79,90</p>
+        <p><b>Margherita</b> – molho de tomate, mussarela, tomate e manjericão ..... P 66,90 / M 71,90 / G 81,90</p>
+        <p><b>Portuguesa</b> – molho, mussarela, presunto, ovo, cebola, ervilha .... P 68,90 / M 73,90 / G 83,90</p>
+        <p><b>Frango c/ requeijão</b> – molho, mussarela, frango e requeijão .... P 69,9 / M 74,90 / G 84,90</p>
+        <p style="color:var(--bad)"><i>(revisar preços do quatro queijos – ver caderno)</i></p>
+      </div>
+    </div>
+
+    <div class="sheet-body" data-panel="cardapio-depois">
+      <div class="controls">
+        <label class="label" for="reajuste">Reajuste das pizzas salgadas (R$)</label>
+        <input type="number" id="reajuste" value="3" min="0" max="20" step="1" style="width:5em">
+        <span class="caption">Regra: soma o valor aos três tamanhos e mantém o final ,90.</span>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Categoria</th><th>Item</th><th class="num">P (R$)</th><th class="num">M (R$)</th><th class="num">G (R$)</th><th>Mudança</th></tr></thead>
+          <tbody id="menu-rows"></tbody>
+        </table>
+      </div>
+      <p class="caption" id="menu-check"></p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="project">
+  <div class="project-head">
+    <span class="label">Método</span>
+    <h2>Como eu construo com IA</h2>
+    <p>Eu não escrevo o código das fórmulas. Meu trabalho é dar o contexto certo, definir as regras do negócio, revisar o que a IA entrega e ajustar com quem vai usar.</p>
+  </div>
+  <ol class="steps">
+    <li><h3>Contexto real</h3><p>Entrego o material de verdade: a planilha antiga, os extratos, o PowerPoint da área, o Word do cardápio.</p></li>
+    <li><h3>Regras do negócio</h3><p>Defino o que a ferramenta precisa saber: metas de CMV, categorias, o que conta como gasto suspeito, a regra de reajuste.</p></li>
+    <li><h3>Revisão</h3><p>Confiro o que a IA aponta, um ponto de cada vez. Nas 15 inconsistências do caixa, cada uma foi checada no extrato.</p></li>
+    <li><h3>Uso e ajuste</h3><p>Coloco a ferramenta para rodar com quem vai usar e ajusto com o que aparece: a família no caixa, a equipe no Pulse Check.</p></li>
+  </ol>
+</section>
+
+<footer>
+  <hr>
+  <span>Ana Laura Morais · analauramorais000@gmail.com · <a href="https://www.linkedin.com/in/ana-laura-morais-281917204/">LinkedIn</a></span>
+  <span>Ferramentas construídas com Claude e Excel. Demonstrações com dados fictícios.</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  const brl = v => "R$ " + v.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+  const brl2 = v => v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  // Tabs: Antes / Depois per project, and the Pulse filter
+  document.querySelectorAll(".tabs").forEach(group => {
+    group.addEventListener("click", e => {
+      const btn = e.target.closest("button"); if (!btn) return;
+      group.querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b === btn)));
+      const g = group.dataset.group, v = btn.dataset.view;
+      if (g === "filtro") { pulseFilter = v; renderPulse(); return; }
+      document.querySelectorAll('[data-panel^="' + g + '-"]').forEach(p => { p.hidden = p.dataset.panel !== g + "-" + v; });
+    });
+  });
+
+  // ---------- Caixa (dados fictícios) ----------
+  const meses = {
+    ago: { canais: { "Maquininha": 118400, "iFood": 46200, "Pix / dinheiro": 21900 },
+           grupos: { "CMV (insumos)": 63400, "Pessoal": 48100, "Ocupação": 14800, "Vendas e taxas": 9300, "Operacional": 7900, "Impostos": 11200 } },
+    set: { canais: { "Maquininha": 112900, "iFood": 49800, "Pix / dinheiro": 20300 },
+           grupos: { "CMV (insumos)": 66900, "Pessoal": 48100, "Ocupação": 14800, "Vendas e taxas": 9900, "Operacional": 8600, "Impostos": 11000 } },
+    out: { canais: { "Maquininha": 121700, "iFood": 53400, "Pix / dinheiro": 22600 },
+           grupos: { "CMV (insumos)": 67200, "Pessoal": 49300, "Ocupação": 14800, "Vendas e taxas": 10500, "Operacional": 7400, "Impostos": 11900 } }
+  };
+  const metas = { "CMV (insumos)": 0.35, "Pessoal": 0.30 };
+  const sum = o => Object.values(o).reduce((a, b) => a + b, 0);
+
+  function renderCaixa() {
+    const m = meses[document.getElementById("mes").value];
+    const fat = sum(m.canais), sai = sum(m.grupos), res = fat - sai, cmv = m.grupos["CMV (insumos)"] / fat;
+    document.getElementById("k-fat").textContent = brl(fat);
+    document.getElementById("k-sai").textContent = brl(sai);
+    document.getElementById("k-res").textContent = brl(res) + " · " + (res / fat * 100).toFixed(1).replace(".", ",") + "%";
+    document.getElementById("k-cmv").textContent = (cmv * 100).toFixed(1).replace(".", ",") + "%" + (cmv > metas["CMV (insumos)"] ? " ▲ acima da meta" : "");
+    document.getElementById("k-cmv-box").classList.toggle("alert", cmv > metas["CMV (insumos)"]);
+
+    const maxC = Math.max(...Object.values(m.canais));
+    document.getElementById("canais").innerHTML = Object.entries(m.canais).map(([k, v]) =>
+      `<div class="bar-row"><span>${k}</span><div class="bar-track"><div class="bar-fill" style="width:${v / maxC * 100}%"></div></div><span class="num">${brl(v)}</span></div>`).join("");
+
+    // Groups as % of revenue, scale 0–40%
+    const scale = 0.40;
+    document.getElementById("grupos").innerHTML = Object.entries(m.grupos).map(([k, v]) => {
+      const pct = v / fat, meta = metas[k];
+      const over = meta && pct > meta;
+      return `<div class="bar-row"><span>${k}</span><div class="bar-track"><div class="bar-fill${over ? " over" : ""}" style="width:${Math.min(pct / scale, 1) * 100}%"></div>${meta ? `<div class="bar-goal" style="left:${meta / scale * 100}%" title="Meta ${meta * 100}%"></div>` : ""}</div><span class="num">${(pct * 100).toFixed(1).replace(".", ",")}%</span></div>`;
+    }).join("");
+  }
+  document.getElementById("mes").addEventListener("change", renderCaixa);
+  renderCaixa();
+
+  const pontos = [
+    ["bad", "Provável duplicado", "Dois lançamentos de R$ 1.240,00 para o mesmo fornecedor em 11/08."],
+    ["warn", "Saldo sem fórmula", "10 linhas da planilha antiga tinham saldo digitado. O sistema novo calcula sozinho."],
+    ["bad", "Receita inflada", "Transferências entre contas da própria empresa estavam somadas como venda."],
+    ["neutral", "Estorno", "Compra e estorno no mesmo dia: os dois lançamentos se anulam."],
+    ["warn", "Gasto pessoal", "Despesas pessoais pagas com o cartão da empresa, separadas num grupo próprio."]
+  ];
+  const ul = document.getElementById("checks");
+  ul.innerHTML = pontos.map(([t, tit, txt], i) =>
+    `<li><input type="checkbox" id="chk${i}" aria-label="Resolvido: ${tit}"><span><span class="tag ${t}">${tit}</span> ${txt}</span></li>`).join("");
+  ul.addEventListener("change", e => { const li = e.target.closest("li"); if (li) li.classList.toggle("done", e.target.checked); });
+
+  // ---------- Pulse Check (dados fictícios) ----------
+  const hoje = new Date(2026, 9, 26);
+  const pulse = [
+    { hot: true,  tema: "Mercado", ini: "Estudo de novo segmento", upd: "Base de projetos atualizada com 3 fontes novas.", prox: "Apresentar à diretoria", resp: "Carla", prazo: "2026-10-30", status: "Em andamento" },
+    { hot: true,  tema: "Eventos", ini: "Evento do setor 2027", upd: "Orçamento aprovado; falta definir estande.", prox: "Fechar fornecedor do estande", resp: "Bruno", prazo: "2026-10-21", status: "Em andamento" },
+    { hot: false, tema: "Eventos", ini: "Convite a palestrante", upd: "Aguardando outra área.", prox: "—", resp: "Diego", prazo: "", status: "Standby" },
+    { hot: true,  tema: "Gestão da área", ini: "Controle de iniciativas", upd: "Todas as linhas com responsável e prazo.", prox: "Revisar antes da reunião", resp: "Ana", prazo: "", status: "Recorrente" },
+    { hot: false, tema: "Apresentações", ini: "Relatório trimestral", upd: "Template definido.", prox: "—", resp: "Elisa", prazo: "2026-10-15", status: "Concluído" },
+    { hot: false, tema: "Ferramentas", ini: "Painel de oportunidades", upd: "Sem atualização nesta semana.", prox: "Corrigir filtro por região", resp: "Diego", prazo: "2026-10-16", status: "Não iniciado" },
+    { hot: false, tema: "Clientes", ini: "Caso de cliente para evento interno", upd: "Gravação agendada.", prox: "Confirmar data com o cliente", resp: "Bruno", prazo: "2026-11-04", status: "Em andamento" }
+  ];
+  let pulseFilter = "destaques";
+  const fmt = d => d ? d.slice(8, 10) + "/" + d.slice(5, 7) : "A definir";
+  const isDone = s => s === "Concluído";
+  const isLate = r => r.prazo && new Date(r.prazo + "T00:00") < hoje && !isDone(r.status) && r.status !== "Standby";
+  const tagFor = r => isLate(r) ? "bad" : isDone(r.status) ? "good" : r.status === "Standby" ? "neutral" : r.status === "Não iniciado" ? "warn" : "accent";
+
+  function renderPulse() {
+    document.getElementById("c-hot").textContent = pulse.filter(r => r.hot).length;
+    document.getElementById("c-open").textContent = pulse.filter(r => !isDone(r.status)).length;
+    document.getElementById("c-late").textContent = pulse.filter(isLate).length;
+    document.getElementById("c-done").textContent = pulse.filter(r => isDone(r.status)).length;
+    const rows = pulseFilter === "destaques" ? pulse.filter(r => r.hot) : pulse;
+    document.getElementById("pulse-rows").innerHTML = rows.map(r =>
+      `<tr class="${r.hot ? "is-hot" : ""}"><td>${r.hot ? '<span class="hot">●</span> ' : ""}${r.tema}</td><td>${r.ini}</td><td>${r.upd}</td><td>${r.prox}</td><td>${r.resp}</td><td class="num">${fmt(r.prazo)}</td><td><span class="tag ${tagFor(r)}">${isLate(r) ? "Vencido" : r.status}</span></td></tr>`).join("");
+  }
+  renderPulse();
+
+  // ---------- Cardápio (dados fictícios) ----------
+  const menu = [
+    ["Pizzas salgadas", "Calabresa", [64.9, 69.9, 79.9]],
+    ["Pizzas salgadas", "Margherita", [66.9, 71.9, 81.9]],
+    ["Pizzas salgadas", "Portuguesa", [68.9, 73.9, 83.9]],
+    ["Pizzas salgadas", "Frango com requeijão", [69.9, 74.9, 84.9]],
+    ["Pizzas salgadas", "Quatro queijos", [72.9, 77.9, 87.9]],
+    ["Pizzas doces", "Chocolate com morango", [62.9, 67.9, 77.9]],
+    ["Bebidas", "Suco natural 450 ml", [13.9, null, null]]
+  ];
+  function renderMenu() {
+    let add = parseInt(document.getElementById("reajuste").value, 10);
+    if (isNaN(add) || add < 0) add = 0;
+    let changed = 0;
+    document.getElementById("menu-rows").innerHTML = menu.map(([cat, item, p]) => {
+      const applies = cat === "Pizzas salgadas" && add > 0;
+      if (applies) changed++;
+      const cell = v => v == null ? "—" : applies ? `<s style="color:var(--ink-2)">${brl2(v)}</s> <b>${brl2(v + add)}</b>` : brl2(v);
+      return `<tr><td>${cat}</td><td>${item}</td><td class="num">${cell(p[0])}</td><td class="num">${cell(p[1])}</td><td class="num">${cell(p[2])}</td><td>${applies ? `<span class="tag accent">+R$ ${add}</span>` : '<span class="tag neutral">sem mudança</span>'}</td></tr>`;
+    }).join("");
+    document.getElementById("menu-check").textContent =
+      `Conferência: ${menu.length} itens na base, ${menu.length} na original, nenhum perdido. ${changed} itens reajustados nesta regra.`;
+  }
+  document.getElementById("reajuste").addEventListener("input", renderMenu);
+  renderMenu();
+})();
+</script>
+</body>
+</html>
